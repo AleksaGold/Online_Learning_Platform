@@ -5,7 +5,7 @@ NULLABLE = {"blank": True, "null": True}
 
 
 class Course(models.Model):
-    """Класс для описания модели "Курс" """
+    """Класс для описания модели Course"""
 
     name = models.CharField(max_length=150, verbose_name="Название курса")
     description = models.TextField(verbose_name="Описание курса", **NULLABLE)
@@ -24,7 +24,7 @@ class Course(models.Model):
 
 
 class Lesson(models.Model):
-    """Класс для описания модели "Урок" """
+    """Класс для описания модели Lesson"""
 
     name = models.CharField(max_length=150, verbose_name="Название урока")
     description = models.TextField(verbose_name="Описание урока", **NULLABLE)
