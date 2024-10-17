@@ -43,7 +43,11 @@ class Payment(models.Model):
     ]
 
     user = models.ForeignKey(
-        User, on_delete=models.SET_NULL, verbose_name="Пользователь", **NULLABLE
+        User,
+        on_delete=models.SET_NULL,
+        verbose_name="Пользователь",
+        related_name="payments",
+        **NULLABLE,
     )
     payment_date = models.DateField(auto_now=False, verbose_name="Дата оплаты")
 
