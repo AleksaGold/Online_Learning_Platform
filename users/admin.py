@@ -1,6 +1,6 @@
 from django.contrib import admin
 
-from users.models import User, Payment
+from users.models import Payment, User
 
 
 @admin.register(User)
@@ -17,4 +17,9 @@ class UserAdmin(admin.ModelAdmin):
 class PaymentAdmin(admin.ModelAdmin):
     """Класс для настройки отображения модели "Payment" в административной панели"""
 
-    list_display = ("id", "user", "course", "lesson",)
+    list_display = (
+        "id",
+        "user",
+        "course",
+        "lesson",
+    )

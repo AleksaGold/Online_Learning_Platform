@@ -17,8 +17,4 @@ class CourseAdmin(admin.ModelAdmin):
 class LessonAdmin(admin.ModelAdmin):
     """Класс для настройки отображения модели "Lesson" в административной панели"""
 
-    list_display = (
-        "pk",
-        "name",
-        "course"
-    )
+    list_display = ("pk", "name", "course")
