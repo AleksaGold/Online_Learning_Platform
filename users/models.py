@@ -8,7 +8,7 @@ NULLABLE = {"blank": True, "null": True}
 
 
 class User(AbstractUser):
-    """Модель User для хранения информации о пользователях веб-приложения"""
+    """Модель User для хранения информации о пользователях веб-приложения."""
 
     username = None
     email = models.EmailField(unique=True, verbose_name="Email")
@@ -24,7 +24,7 @@ class User(AbstractUser):
     REQUIRED_FIELDS = []
 
     def __str__(self):
-        """Возвращает строковое представление объекта"""
+        """Возвращает строковое представление объекта."""
         return self.email
 
     class Meta:
@@ -33,7 +33,7 @@ class User(AbstractUser):
 
 
 class Payment(models.Model):
-    """Класс для описания модели Payment"""
+    """Класс для описания модели Payment."""
 
     CASH = "cash"
     TRANSFER = "transfer"

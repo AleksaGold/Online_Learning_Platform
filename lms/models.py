@@ -4,7 +4,7 @@ NULLABLE = {"blank": True, "null": True}
 
 
 class Course(models.Model):
-    """Класс для описания модели Course"""
+    """Класс для описания модели Course."""
 
     name = models.CharField(max_length=150, verbose_name="Название курса")
     description = models.TextField(verbose_name="Описание курса", **NULLABLE)
@@ -18,12 +18,12 @@ class Course(models.Model):
         ordering = ("name",)
 
     def __str__(self):
-        """Возвращает строковое представление объекта"""
+        """Возвращает строковое представление объекта."""
         return f"{self.name}"
 
 
 class Lesson(models.Model):
-    """Класс для описания модели Lesson"""
+    """Класс для описания модели Lesson."""
 
     name = models.CharField(max_length=150, verbose_name="Название урока")
     description = models.TextField(verbose_name="Описание урока", **NULLABLE)
@@ -45,5 +45,5 @@ class Lesson(models.Model):
         ordering = ("name",)
 
     def __str__(self):
-        """Возвращает строковое представление объекта"""
+        """Возвращает строковое представление объекта."""
         return f"{self.name} ({self.course})"
