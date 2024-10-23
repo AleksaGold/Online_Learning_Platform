@@ -35,7 +35,7 @@ class UserViewSet(ModelViewSet):
 
     def get_permissions(self):
         """Создает и возвращает список разрешений, требуемых для регистрации пользователя."""
-        if self.action == 'create':
+        if self.action == "create":
             permission_classes = [AllowAny]
         else:
             permission_classes = [IsAuthenticated]
