@@ -22,4 +22,4 @@ class IsUserPermission(permissions.BasePermission):
 
     def has_object_permission(self, request, view, obj):
         """Проверяет является ли пользователь объектом."""
-        return obj.email == request.user.email
+        return obj == request.user
