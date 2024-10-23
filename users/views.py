@@ -1,10 +1,13 @@
+from django.shortcuts import get_object_or_404
 from django_filters.rest_framework import DjangoFilterBackend
 from rest_framework import filters
-from rest_framework.permissions import AllowAny, IsAuthenticated
+from rest_framework.permissions import AllowAny, IsAuthenticated, IsAdminUser
+from rest_framework.response import Response
 from rest_framework.viewsets import ModelViewSet
 
 from users.models import Payment, User
-from users.serializers import PaymentSerializer, UserSerializer
+from users.permissions import IsUserPermission
+from users.serializers import PaymentSerializer, UserSerializer, UserShortcutSerializer
 
 
 class PaymentViewSet(ModelViewSet):
@@ -27,6 +30,22 @@ class UserViewSet(ModelViewSet):
     queryset = User.objects.all()
     serializer_class = UserSerializer
 
+    def list(self, request, *args, **kwargs):
+        """Переопределение метода для вывода ограниченной информации по пользователям."""
+        queryset = User.objects.all()
+        serializer = UserShortcutSerializer(queryset, many=True)
+        return Response(serializer.data)
+
+    def retrieve(self, request, pk=None):
+        """Переопределение метода для вывода полной информации только по профилю пользователя."""
+        queryset = User.objects.all()
+        user = get_object_or_404(queryset, pk=pk)
+        if self.request.user == user:
+            serializer = UserSerializer(user)
+        else:
+            serializer = UserShortcutSerializer(user)
+        return Response(serializer.data)
+
     def perform_create(self, serializer):
         """Сохраняет сериализованные данные при регистрации пользователя и хэширует пароль."""
         user = serializer.save(is_active=True)
@@ -35,8 +54,20 @@ class UserViewSet(ModelViewSet):
 
     def get_permissions(self):
         """Создает и возвращает список разрешений, требуемых для регистрации пользователя."""
-        if self.action == "create":
+        if self.action == 'create':
             permission_classes = [AllowAny]
         else:
             permission_classes = [IsAuthenticated]
         return [permission() for permission in permission_classes]
+
+    # def get_permissions(self):
+    #     """Создает и возвращает список разрешений, требуемых для регистрации пользователя."""
+    #     if self.action == "create":
+    #         self.permission_classes = (AllowAny,)
+    #     elif self.action == "update":
+    #         self.permission_classes = (IsUserPermission,)
+    #     elif self.action in ["list", "retrieve"]:
+    #         self.permission_classes = (IsAuthenticated,)
+    #     else:
+    #         self.permission_classes = (IsAdminUser,)
+    #     return super().get_permissions()
