@@ -4,7 +4,7 @@ from lms.models import Course, Lesson
 
 
 class LessonSerializer(ModelSerializer):
-    """Сериализатор для модели Lesson"""
+    """Сериализатор для модели Lesson."""
 
     class Meta:
         model = Lesson
@@ -12,7 +12,7 @@ class LessonSerializer(ModelSerializer):
 
 
 class CourseSerializer(ModelSerializer):
-    """Сериализатор для модели Course"""
+    """Сериализатор для модели Course."""
 
     class Meta:
         model = Course
@@ -20,13 +20,13 @@ class CourseSerializer(ModelSerializer):
 
 
 class CourseDetailSerializer(ModelSerializer):
-    """Сериализатор для одного объекта Course"""
+    """Сериализатор для одного объекта Course."""
 
     count_lessons = SerializerMethodField(read_only=True)
     lessons = LessonSerializer(many=True, read_only=True)
 
     def get_count_lessons(self, course):
-        """Возвращает количество уроков курса"""
+        """Возвращает количество уроков курса."""
         return Lesson.objects.filter(course=course).count()
 
     class Meta:
@@ -38,4 +38,5 @@ class CourseDetailSerializer(ModelSerializer):
             "preview",
             "count_lessons",
             "lessons",
+            "owner",
         )

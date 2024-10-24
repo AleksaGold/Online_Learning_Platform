@@ -17,6 +17,7 @@ django-phonenumber-field = {extras = ["phonenumberslite"], version = "^8.0.0"}
 isort = "^5.13.2"
 ipython = "^8.28.0"
 django-filter = "^24.3"
+djangorestframework-simplejwt = "^5.3.1"
 
 
 [build-system]
