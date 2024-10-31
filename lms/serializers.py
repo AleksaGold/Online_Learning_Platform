@@ -1,10 +1,12 @@
-from rest_framework.serializers import ModelSerializer, SerializerMethodField
+from rest_framework.serializers import ModelSerializer, SerializerMethodField, URLField
 
 from lms.models import Course, Lesson
+from lms.validators import validate_lesson_video_link
 
 
 class LessonSerializer(ModelSerializer):
     """Сериализатор для модели Lesson."""
+    video_link = URLField(validators=[validate_lesson_video_link])
 
     class Meta:
         model = Lesson
