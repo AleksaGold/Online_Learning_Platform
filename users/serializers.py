@@ -1,9 +1,9 @@
-from rest_framework.serializers import ModelSerializer
+from rest_framework import serializers
 
 from users.models import Payment, User
 
 
-class PaymentSerializer(ModelSerializer):
+class PaymentSerializer(serializers.ModelSerializer):
     """Сериализатор для модели Payment."""
 
     class Meta:
@@ -11,7 +11,7 @@ class PaymentSerializer(ModelSerializer):
         fields = "__all__"
 
 
-class UserSerializer(ModelSerializer):
+class UserSerializer(serializers.ModelSerializer):
     """Сериализатор для модели User."""
 
     payments = PaymentSerializer(many=True, read_only=True)
@@ -30,7 +30,7 @@ class UserSerializer(ModelSerializer):
         )
 
 
-class UserShortcutSerializer(ModelSerializer):
+class UserShortcutSerializer(serializers.ModelSerializer):
     """Сериализатор для сокращенного просмотра модели User."""
 
     class Meta:
