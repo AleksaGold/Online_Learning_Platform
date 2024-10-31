@@ -65,6 +65,7 @@ class Lesson(models.Model):
 
 class Subscription(models.Model):
     """Класс для описания модели Subscription."""
+
     user = models.ForeignKey(
         settings.AUTH_USER_MODEL,
         on_delete=models.CASCADE,
@@ -75,7 +76,7 @@ class Subscription(models.Model):
         Course,
         on_delete=models.CASCADE,
         verbose_name="Курс",
-        related_name="subscription"
+        related_name="subscription",
     )
 
     class Meta:

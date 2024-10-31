@@ -6,6 +6,7 @@ from lms.validators import validate_lesson_video_link
 
 class LessonSerializer(serializers.ModelSerializer):
     """Сериализатор для модели Lesson."""
+
     video_link = serializers.URLField(validators=[validate_lesson_video_link])
 
     class Meta:
@@ -34,7 +35,7 @@ class CourseDetailSerializer(serializers.ModelSerializer):
 
     def get_subscribers(self, course):
         """Возвращает подписчиков курса."""
-        user = self.context['request'].user
+        user = self.context["request"].user
         return Subscription.objects.filter(user=user).filter(course=course).exists()
 
     class Meta:

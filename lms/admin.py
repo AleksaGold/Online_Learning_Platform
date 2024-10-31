@@ -19,6 +19,7 @@ class LessonAdmin(admin.ModelAdmin):
 
     list_display = ("pk", "name", "course")
 
+
 @admin.register(Subscription)
 class SubscriptionAdmin(admin.ModelAdmin):
     """Класс для настройки отображения модели "Subscription" в административной панели"""
