@@ -50,11 +50,3 @@ class CourseDetailSerializer(serializers.ModelSerializer):
             "owner",
             "subscribers",
         )
-
-
-# class SubscriptionSerializer(serializers.ModelSerializer):
-#     """Сериализатор для модели Subscription."""
-#
-#     class Meta:
-#         model = Subscription
-#         fields = "__all__"
