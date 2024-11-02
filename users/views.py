@@ -7,8 +7,7 @@ from rest_framework.viewsets import ModelViewSet
 
 from users.models import Payment, User
 from users.permissions import IsUserPermission
-from users.serializers import (PaymentSerializer, UserSerializer,
-                               UserShortcutSerializer)
+from users.serializers import PaymentSerializer, UserSerializer, UserShortcutSerializer
 
 
 class PaymentViewSet(ModelViewSet):
