@@ -61,3 +61,29 @@ class Lesson(models.Model):
     def __str__(self):
         """Возвращает строковое представление объекта."""
         return f"{self.name} ({self.course})"
+
+
+class Subscription(models.Model):
+    """Класс для описания модели Subscription."""
+
+    user = models.ForeignKey(
+        settings.AUTH_USER_MODEL,
+        on_delete=models.CASCADE,
+        verbose_name="Пользователь",
+        related_name="subscription",
+    )
+    course = models.ForeignKey(
+        Course,
+        on_delete=models.CASCADE,
+        verbose_name="Курс",
+        related_name="subscription",
+    )
+
+    class Meta:
+        verbose_name = "Подписка"
+        verbose_name_plural = "Подписки"
+        ordering = ("user", "course")
+
+    def __str__(self):
+        """Возвращает строковое представление объекта."""
+        return f"{self.user} - {self.course}"
