@@ -1,11 +1,7 @@
 from django.shortcuts import get_object_or_404
-from rest_framework.generics import (
-    CreateAPIView,
-    DestroyAPIView,
-    ListAPIView,
-    RetrieveAPIView,
-    UpdateAPIView,
-)
+from rest_framework.generics import (CreateAPIView, DestroyAPIView,
+                                     ListAPIView, RetrieveAPIView,
+                                     UpdateAPIView)
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.response import Response
 from rest_framework.views import APIView
@@ -13,7 +9,8 @@ from rest_framework.viewsets import ModelViewSet
 
 from lms.models import Course, Lesson, Subscription
 from lms.paginators import CustomPagination
-from lms.serializers import CourseDetailSerializer, CourseSerializer, LessonSerializer
+from lms.serializers import (CourseDetailSerializer, CourseSerializer,
+                             LessonSerializer)
 from users.permissions import IsModeratorPermission, IsOwnerPermission
 
 

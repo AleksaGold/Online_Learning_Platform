@@ -63,6 +63,11 @@ class Payment(models.Model):
         max_length=20, choices=PAYMENT_METHOD, verbose_name="Способ оплаты"
     )
 
+    session_id = models.CharField(max_length=300, verbose_name="ID сессии", **NULLABLE)
+    payment_link = models.URLField(
+        max_length=400, verbose_name="Ссылка на оплату", **NULLABLE
+    )
+
     def __str__(self):
         return f"{self.course if self.course else self.lesson} : {self.user} "
 
