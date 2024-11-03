@@ -36,8 +36,6 @@ class PaymentViewSet(ModelViewSet):
         payment.payment_link = session_link
         payment.save()
 
-        pass
-
 
 class UserViewSet(ModelViewSet):
     """Вьюсет для работы с моделью User."""
