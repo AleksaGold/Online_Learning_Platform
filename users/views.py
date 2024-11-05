@@ -9,6 +9,8 @@ from users.models import Payment, User
 from users.permissions import IsUserPermission
 from users.serializers import (PaymentSerializer, UserSerializer,
                                UserShortcutSerializer)
+from users.services import (create_stripe_price, create_stripe_product,
+                            create_stripe_session)
 
 
 class PaymentViewSet(ModelViewSet):
@@ -23,6 +25,16 @@ class PaymentViewSet(ModelViewSet):
         "lesson",
     )
     ordering_fields = ("payment_date",)
+
+    def perform_create(self, serializer):
+        """Переопределения метода для возможности оплаты курсов."""
+        payment = serializer.save(user=self.request.user)
+        product = create_stripe_product(payment.course)
+        price = create_stripe_price(payment.payment_amount, product)
+        session_id, session_link = create_stripe_session(price)
+        payment.session_id = session_id
+        payment.payment_link = session_link
+        payment.save()
 
 
 class UserViewSet(ModelViewSet):
