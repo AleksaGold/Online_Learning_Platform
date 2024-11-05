@@ -11,6 +11,7 @@ from lms.models import Course, Lesson, Subscription
 from lms.paginators import CustomPagination
 from lms.serializers import (CourseDetailSerializer, CourseSerializer,
                              LessonSerializer)
+from lms.tasks import send_email_to_subscribers
 from users.permissions import IsModeratorPermission, IsOwnerPermission
 
 
@@ -49,6 +50,11 @@ class CourseViewSet(ModelViewSet):
     def perform_create(self, serializer):
         """Переопределение метода для автоматической привязки владельца к создаваемому объекту."""
         serializer.save(owner=self.request.user)
+
+    def perform_update(self, serializer):
+        """Переопределение метода для отправки сообщения об обновлении курса"""
+        instance = serializer.save()
+        send_email_to_subscribers.delay(instance.pk)
 
 
 class LessonCreateAPIView(CreateAPIView):
